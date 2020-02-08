@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../ExitTheGame/.idea/ExitTheGame.iml" filepath="$PROJECT_DIR$/../ExitTheGame/.idea/ExitTheGame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../fitt/.idea/fitt.iml" filepath="$PROJECT_DIR$/../fitt/.idea/fitt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/missile_shit.iml" filepath="$PROJECT_DIR$/.idea/missile_shit.iml" />
+    </modules>
+  </component>
+</project>

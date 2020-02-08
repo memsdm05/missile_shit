@@ -1,0 +1,36 @@
+Plan: Ascii Missiles
+Flux is how "big" a missile is. Your ship has a flux capacity and a flux regen.
+When you launch a missile, the missile subtracts your ships flux by the sum of
+the flux on the parts. The flux on your ship continually recharges based on your
+regen speed. You cannot launch a missile with more flux then the shup.
+
+
+Explosives/Payload
+@ = HE - Instantly kills enemy in a radius -10F
+* = Frag - Has a chance of killing enemies. Closer the enemy the higher the chance -7F
+< = AP - Kills the enemy on hit - 1F
+$ = Flare (Countermeasure) - Redirects enemy focus off you and onto it -5F
+
+Structural - holds various amounts of fuel based on size
+= = Standard Fuselage - 5F
+- = Thin Fuselage - 1F
+# = Thicc Fuselage - 9F
+
+Thrust
+: = Twin Mini Booster - Two low thrust boosters that increase maneuverability - 12F
+. = Mini Booster - Low thrust, Low fuel consumption - 6F
+> = Booster - Medium thrust, Medium fuel consumption - 17F
+} = Mk2 Booster - High thrust, High fuel consumption - 35F
+] = End Cap - Has no thrust value but increases yield by 1.4x. -7F
+
+Maneuvering
+{ = Swept Fins - Fins that work the best at high speeds - 5F
+[ = Straight Fins - Fins that work best at low speeds - 5F
+K = Hybrid Fin - Fins that work well at all speeds - 10F
+| = Thrust Vectoring - Like Hybrid Fins but use fuel to maneuver - 6F
+
+Misc
+o = Cooldown Limiter - decreases flux on missiles. - -10F
+Blink drives instantly teleports to an enemy. Uses a lot of fuel
+) = Blink Drive 1 - First part of the Blink Drive. - 30F
+( = Blink Drive 2 - Second part of the Blink Drive - 30F
