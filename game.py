@@ -30,13 +30,27 @@ class Background:
                 offset_bunch = [pyglet.sprite.Sprite(self.back_img, x, y, subpixel=True, batch=self.back), x, y]
                 self.b_sprites.append(offset_bunch)
 
+    def local_draw(self, x, y, loading_radius=3):
+        self.back = pyglet.graphics.Batch()
+
+        self.b_sprites = []
+        chunk_x, chunk_y = self.get_chunk(-x, -y)
+        for X in range(chunk_x-loading_radius, chunk_x+loading_radius+1):
+            for Y in range(chunk_y-loading_radius, chunk_y+loading_radius+1):
+                x, y = X * self.back_img.width, Y * self.back_img.height
+                offset_bunch = [pyglet.sprite.Sprite(self.back_img, x, y, subpixel=True, batch=self.back), x, y]
+                self.b_sprites.append(offset_bunch)
+
     # update ALL the backgrounds (aka the grid)
     def update_all(self, x, y, w, h):
         for s in self.b_sprites:
             mx = x+s[1]+w/2
             my = y+s[2]+h/2
 
-            s[0].update(mx, my) # offset by half a screen so 0, 0 is bottom left
+            s[0].update(mx, my)  # offset by half a screen so 0, 0 is bottom left
+
+    def get_chunk(self, x, y):
+        return int(x//self.back_img.width), int(y//self.back_img.height)
 
 
 class Game(pyglet.window.Window):
@@ -135,10 +149,11 @@ class Game(pyglet.window.Window):
         # self.back.anchor_x = self.back.width // 2
         # self.back.anchor_y = self.back.height // 2
 
+        self.stuff.local_draw(self.x, self.y, 3)
         self.stuff.update_all(self.x, self.y, self.width, self.height)
         self.stuff.back.draw()
 
-        label = pyglet.text.Label(f'{-int(self.x)} {-int(self.y)} {int(self.turn)} {int(self.speed)} {int(self.thrust*100)/100}',
+        label = pyglet.text.Label(f'{(self.stuff.get_chunk(self.x, self.y))}{-int(self.x)} {-int(self.y)} {int(self.turn)} {int(self.speed)} {int(self.thrust*100)/100}',
                                   font_size=12,
                                   x=self.width-10, y=self.height-20,
                                   anchor_x='right', anchor_y='center')
@@ -148,9 +163,9 @@ class Game(pyglet.window.Window):
 
         glLineWidth(10)
         if self.thrust != 0.8:
-            glColor3f(self.thrust,self.thrust,self.thrust)
+            glColor3f(self.thrust, self.thrust, self.thrust)
         else:
-            glColor3f(1.,0.,0.)
+            glColor3f(1., 0., 0.)
 
         self.effects()
         if self.press:
@@ -226,7 +241,7 @@ def main():
     window.set_minimum_size(1080, 720)
     window.set_icon(pyglet.image.load('images/thumb.png'))
 
-    FPS   = pyglet.window.FPSDisplay(window)
+    FPS  = pyglet.window.FPSDisplay(window)
 
     cursor = window.get_system_mouse_cursor(window.CURSOR_CROSSHAIR)
     window.set_mouse_cursor(cursor)
