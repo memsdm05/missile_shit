@@ -84,6 +84,7 @@ class Game(pyglet.window.Window):
         # movement booleans
         self.press = False
         self.reverse = False
+        self.brakes = False
 
     # Get angle of ship to mouse
     def angle(self):
@@ -119,6 +120,9 @@ class Game(pyglet.window.Window):
             else:
                 self.thrustX += self.diffX
                 self.thrustY += self.diffY
+        if self.brakes:
+            self.thrustX *= 0.95
+            self.thrustY *= 0.95
 
     def effects(self):
         self.shake  = r.uniform(-1, 1) * self.speed / 30 if self.press else 0
@@ -186,8 +190,10 @@ class Game(pyglet.window.Window):
         if symbol == key.ESCAPE:
             sys.exit()
         elif symbol == key.T:
-            self.thrustX = 0
-            self.thrustY = 0
+            self.brakes = True
+            #self.thrustX = 0
+            #self.thrustY = 0
+
         elif symbol == key.R:
             self.x = self.xR
             self.y = self.yR
@@ -206,6 +212,8 @@ class Game(pyglet.window.Window):
         elif symbol == key.S:
             self.press = False
             self.reverse = False
+        elif symbol == key.T:
+            self.brakes = False
 
     def on_close(self):
         sys.exit()
